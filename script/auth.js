@@ -1,5 +1,23 @@
 
 
+// user status
+
+auth.onAuthStateChanged(user =>{
+    if(user){
+        db.collection('post').onSnapshot(snapshot =>{
+            getUserInfo(user);
+            userData(snapshot.docs);
+        })
+        
+        
+    } else {
+        console.log("tu będzie przekierowanie do strony logowania");
+    }
+})
+
+
+
+
 // SIGN UP NEW USER
 
 
@@ -13,7 +31,6 @@ singupForm.addEventListener('submit', e => {
 
     auth.createUserWithEmailAndPassword(email,password)
     .then(() =>{
-        console.log('Zalogowane!');
         singupForm.reset();
     });
 
@@ -34,9 +51,26 @@ loginForm.addEventListener('submit', e => {
 
     auth.signInWithEmailAndPassword(email,password)
     .then(() =>{
-        db.collection('users').getUsers()
+        // db.collection('users').getUsers()
         singupForm.reset();
     });
 
 });
 
+
+
+// ADD MESSAGE 
+
+
+const logout = document.querySelector('#logout');
+
+logout.addEventListener('click', e => {
+    e.preventDefault();
+
+    auth.signOut().then(() =>{
+        console.log('Wylogowano.');
+    }).catch(() =>{
+        console.log("Err wylogowania.");
+    })
+
+});

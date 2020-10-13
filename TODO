@@ -1,0 +1,4 @@
+- dodawanie posta bez konieczności oświeżania, tak żeby post się od razu dodał
+a nie wczytywał wszystkie 
+
+- dodawanie postów chronologicznie a nie tak żeby sie mieszały
