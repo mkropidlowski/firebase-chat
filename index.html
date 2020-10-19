@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    
+<!--     
     <form id="signup-form">
         <div class="input-field">
           <input type="email" id="signup-email" required />
@@ -19,9 +19,9 @@
         </div>
         <button class="btn">Sign up</button>
     </form>
-    <br><br><br>
+    <br><br><br> -->
 
-    <form id="login-form">
+    <!-- <form id="login-form">
         <div class="input-field">
           <input type="email" id="login-email" required />
           <label for="login-email">Email address</label>
@@ -35,19 +35,21 @@
 
       <a href="#" class="grey-text" id="logout">Logout</a>
 
-      <br><br><br>
+      <br><br><br> -->
+      
+      <form id="newUsername">
+        <label>Username: </label><input type="text" id="username" required>
+        <button class="btn-add">Change</button>
+      </form>
+      <br>
+
 
       <form id="inputMessage">
-        <input type="text" id="addUserMessage" required>
+        <label>Message: </label><input type="text" id="addUserMessage" required>
         <button class="btn-add">Send</button>
       </form>
 
-      <div class="dataContainer">
-       
-      </div>
-
-      
-      <p class="userMessage"></p>
+      <div class="userMessage"></div>
 
 
 
@@ -77,8 +79,9 @@
 
 </script>
 
-
+<script src="script/ui.js"></script>
+<script src="script/app.js"></script>  
 <script src="script/auth.js"></script>
-<script src="script/app.js"></script>    
+  
 </body>
 </html>

@@ -1,60 +1,66 @@
 
-const dataContainer = document.querySelector('.dataContainer');
-const userMessage = document.querySelector('.userMessage');
+// const usernameEmail = document.querySelector('.usernameEmail');
 
-const getUserInfo = (user) => {
-    if(user){
-             const html = `
-            <h2 class="userEmail">${user.email}</h2>
-            `;
-            dataContainer.innerHTML = html;
-                
-    } else {
-        console.log('err');
-    };
-
-    actuallUserId(user);
-   
-};
-
-const actuallUserId = (user) =>{
-
-
-    const inputMessage = document.querySelector('#inputMessage');
-
-        inputMessage.addEventListener('submit', e => {
-            e.preventDefault();
-
-            db.collection('post').add({
-                text: inputMessage['addUserMessage'].value,
-                userId: user.uid
-            }).then(() =>{
-                inputMessage.reset();
-            }).catch(err => {
-                console.log(err.message);
-            });
-        
-        });
-
-  };
+const inputMessage = document.querySelector('#inputMessage');
 
 
 
-const userData = (data => {
 
-    if(data.length){
-        data.forEach(doc =>{
-            const post = doc.data();
-           
-            const messageHtml = `
-            <p>${post.text}</p>
-            `
-
-            userMessage.innerHTML += messageHtml;
-
-
-        });
+class Chat {
+    constructor(username){
+        this.username = username;
+        this.chats = db.collection('post');
     }
-})
+
+    async addChat(message){
+
+        const date = new Date();
+
+        const chatMessage = {
+            message,
+            username: this.username,
+            created_at: firebase.firestore.Timestamp.fromDate(date)
+        };
+
+        const response =  await this.chats.add(chatMessage);
+        return response;
+
+    }
+
+    getMessage(callback){
+        this.chats
+        .orderBy('created_at')
+        .onSnapshot(snapshot =>{
+            snapshot.docChanges().forEach(change =>{
+                if(change.type === 'added'){
+                    callback(change.doc.data());
+                }
+            })
+        })
+    }
+
+    getUsername(username){
+        this.username = username;
+
+        localStorage.setItem('username', username);
+    }
+
+
+
+
+}
+
+
+
+
+inputMessage.addEventListener('submit', e => {
+    e.preventDefault();
+  
+    chat.addChat(inputMessage['addUserMessage'].value)
+        .then(() => console.log('chat added!'))
+        .catch(err => console.log(err));
+
+});
+
 
 
