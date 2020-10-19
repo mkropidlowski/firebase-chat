@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>ChatAPP</title>
 </head>
 <body>
@@ -36,22 +37,34 @@
       <a href="#" class="grey-text" id="logout">Logout</a>
 
       <br><br><br> -->
-      <p>Wpisz swój nick i daj change, potem wpisz wiadomość naciśnij SEND</p>
+      <div class="container">
+
+
+
       <form id="newUsername">
         <label>Username: </label><input type="text" id="username" required>
         <button class="btn-add">Change</button>
       </form>
-      <br>
-
-
-      <form id="inputMessage">
-        <label>Message: </label><input type="text" id="addUserMessage" required>
-        <button class="btn-add">Send</button>
-      </form>
-
+      <br> 
+      
       <div class="userMessage"></div>
+      
+      <form id="inputMessage">
 
+      <div class="input-group mb-3 ">
+        <input type="text" id="addUserMessage" class="form-control" placeholder="">
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-secondary btn-add" type="button"><img src="/img/send.png"></button>
+        </div>     
+      </div>
 
+       </form>
+     
+  
+
+    
+
+      </div>
 
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
@@ -81,7 +94,7 @@
 
 <script src="script/ui.js"></script>
 <script src="script/app.js"></script>  
-<script src="script/auth.js"></script>
+<script src="script/chat.js"></script>
   
 </body>
 </html>
