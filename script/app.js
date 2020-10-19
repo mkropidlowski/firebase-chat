@@ -60,6 +60,7 @@ inputMessage.addEventListener('submit', e => {
         .then(() => console.log('chat added!'))
         .catch(err => console.log(err));
 
+    inputMessage.reset();
 });
 
 
