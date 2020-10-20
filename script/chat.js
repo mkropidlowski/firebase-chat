@@ -17,7 +17,12 @@ newUsername.addEventListener('submit', e =>{
 })
 
 
-const username = localStorage.username ? localStorage.username : 'anon';
+// const username = localStorage.username ? localStorage.username : 'anon';
+if(localStorage.username) {
+    localStorage.username;
+} else {
+    localStorage.username ='anon';
+}
 
 const chatUI = new ChatUI(userMessage);
 const chat = new Chat(username);

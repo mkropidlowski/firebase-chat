@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+
+
     <title>ChatAPP</title>
 </head>
 <body>
@@ -39,30 +42,29 @@
       <br><br><br> -->
       <div class="container">
 
-
-
-      <form id="newUsername">
-        <label>Username: </label><input type="text" id="username" required>
-        <button class="btn-add">Change</button>
-      </form>
-      <br> 
-      
-      <div class="userMessage"></div>
-      
-      <form id="inputMessage">
-
-      <div class="input-group mb-3 ">
-        <input type="text" id="addUserMessage" class="form-control" placeholder="">
-        <div class="input-group-prepend">
-          <button class="btn btn-outline-secondary btn-add" type="button"><img src="/img/send.png"></button>
-        </div>     
-      </div>
-
-       </form>
      
-  
+          <form id="newUsername" class="newUserContainer">
+            <label>Username: </label><input type="text" id="username" class="username" required>
+            <button class="btn-add">Change</button>
+          </form>
+          <br>
 
-    
+
+          <div class="userMessage"></div>
+
+ 
+        <form id="inputMessage" class="msgContainer">
+
+          <div class="msgBox">
+            <input type="text" id="addUserMessage" class="userInputMsg" required>
+            <button class="btnAddMsg"><img src="img/send.png" width="20px" height="20px"></button>
+          </div>
+
+      
+        </form>
+      
+
+        <div class="circle"></div>
 
       </div>
 
