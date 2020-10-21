@@ -1,12 +1,12 @@
 const userMessage= document.querySelector('.userMessage');
 const newUsername = document.querySelector('#newUsername');
-const displayUsername = document.querySelector('.displayUsername');
-
 
 newUsername.addEventListener('submit', e =>{
     e.preventDefault();
 
     const newName = newUsername['username'].value;
+
+    
 
     chat.getUsername(newName);
     newUsername.reset();

@@ -109,4 +109,17 @@ body,html {
     width: 30px;
     border-radius: 100%;
     margin-left: 10px;
+    
   }
+
+  .container h3 {
+      width:250px;
+  }
+
+ .displayUsername {
+     padding: 10px;
+ }
+
+ .addBorder {
+     border: 1px solid black;
+ }

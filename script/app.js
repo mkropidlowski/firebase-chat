@@ -20,13 +20,18 @@ colorContainer.innerHTML += htmlColor;
 colorContainer.addEventListener('click', e => {
     
     if(e.target.classList.contains('colorCircle')){
-
+        // e.target.classList.add('pickedColor');
         choosenColor = e.target.style.backgroundColor;
         localStorage.setItem('userPickedColor', choosenColor);
     } else {
-        console.log('err');
+        // e.target.classList.remove('pickedColor');
     }
+
+    // if(e.target.classList.contains('pickedColor')) {
+    //     e.target.classList.add('addBorder');
+    // }
     
+
     
 });
 
