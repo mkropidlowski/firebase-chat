@@ -1,7 +1,6 @@
 const userMessage= document.querySelector('.userMessage');
 const newUsername = document.querySelector('#newUsername');
-
-
+const displayUsername = document.querySelector('.displayUsername');
 
 
 newUsername.addEventListener('submit', e =>{
@@ -10,19 +9,13 @@ newUsername.addEventListener('submit', e =>{
     const newName = newUsername['username'].value;
 
     chat.getUsername(newName);
-
-
     newUsername.reset();
 
 })
 
 
-// const username = localStorage.username ? localStorage.username : 'anon';
-if(localStorage.username) {
-    localStorage.username;
-} else {
-    localStorage.username ='anon';
-}
+const username = localStorage.username ? localStorage.username : 'anon';
+
 
 const chatUI = new ChatUI(userMessage);
 const chat = new Chat(username);

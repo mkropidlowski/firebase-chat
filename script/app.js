@@ -1,15 +1,36 @@
 
 const inputMessage = document.querySelector('#inputMessage');
+const colorContainer = document.querySelector('.colorContainer');
 
 
-const randomColor = () => {
-    const color = Math.floor(Math.random()*16777215).toString(16);
+
+
+const colorArray = ['#50a903', '#0069D9', '#E0A801', '#128496','#C82332','#5A6268'];
+
+colorArray.forEach(color => {
+
+    const htmlColor = `
+    <div class="colorCircle" style="background-color:${color}"><div>
+    `;
+
+colorContainer.innerHTML += htmlColor;
+
+});
+
+colorContainer.addEventListener('click', e => {
     
-    localStorage.setItem('userColor', color);
+    if(e.target.classList.contains('colorCircle')){
 
-}
+        choosenColor = e.target.style.backgroundColor;
+        localStorage.setItem('userPickedColor', choosenColor);
+    } else {
+        console.log('err');
+    }
+    
+    
+});
 
-randomColor();
+
 
 
 class Chat {
@@ -20,7 +41,7 @@ class Chat {
 
     async addChat(message){
 
-        const getColor = localStorage.getItem('userColor');
+        const getColor = localStorage.getItem('userPickedColor');
         const date = new Date();
 
         const chatMessage = {
@@ -31,6 +52,7 @@ class Chat {
         };
 
         const response =  await this.chats.add(chatMessage);
+        
         return response;
 
     }
@@ -47,23 +69,18 @@ class Chat {
         })
     }
 
-
     getUsername(username){
         this.username = username;
     
         localStorage.setItem('username', username);    
     }
-
    
-        
-
-    
 }
+
 
 
 inputMessage.addEventListener('submit', e => {
     e.preventDefault();
-
 
     chat.addChat(inputMessage['addUserMessage'].value)
         .then(() => console.log('chat added!'))
