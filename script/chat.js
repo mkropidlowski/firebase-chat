@@ -6,7 +6,6 @@ newUsername.addEventListener('submit', e =>{
 
     const newName = newUsername['username'].value;
 
-    
 
     chat.getUsername(newName);
     newUsername.reset();
@@ -23,6 +22,7 @@ const chat = new Chat(username);
 chat.getMessage((data) =>{
     
     chatUI.render(data);
+    
   
 });
 

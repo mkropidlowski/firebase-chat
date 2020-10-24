@@ -1,6 +1,40 @@
 
 const inputMessage = document.querySelector('#inputMessage');
 const colorContainer = document.querySelector('.colorContainer');
+const image = document.querySelector('#image');
+
+
+// function uploadImage() {
+
+//     const ref = firebase.storage().ref();
+
+//     const file = document.querySelector('#photo').files[0];
+
+//     const name = file.name;
+//     const metadata = {
+//         contentType:file.type
+//     }
+
+
+//     const task = ref.child(name).put(file, metadata);
+
+//     task
+//     .then(snapshot => {
+//         // snapshot.ref.getDownloadURL();
+//         image.src = snapshot.name;
+//         console.log(snapshot.metadata);
+//         console.log(snapshot.metadata.name);
+//     })
+//     // .then(url =>{
+//     //     console.log(url);
+//     // })
+
+// }
+
+
+
+
+
 
 
 
@@ -20,17 +54,14 @@ colorContainer.innerHTML += htmlColor;
 colorContainer.addEventListener('click', e => {
     
     if(e.target.classList.contains('colorCircle')){
-        // e.target.classList.add('pickedColor');
+        
         choosenColor = e.target.style.backgroundColor;
         localStorage.setItem('userPickedColor', choosenColor);
     } else {
-        // e.target.classList.remove('pickedColor');
+     
     }
 
-    // if(e.target.classList.contains('pickedColor')) {
-    //     e.target.classList.add('addBorder');
-    // }
-    
+
 
     
 });
@@ -90,6 +121,10 @@ inputMessage.addEventListener('submit', e => {
     chat.addChat(inputMessage['addUserMessage'].value)
         .then(() => console.log('chat added!'))
         .catch(err => console.log(err));
+
+    const audio = new Audio('img/messSound.mp3');
+    audio.play();
+
 
     inputMessage.reset();
 });
