@@ -21,8 +21,7 @@ const chat = new Chat(username);
 
 
 chat.getMessage((data) =>{
-
-    
+  
   chatUI.render(data);
     
 });

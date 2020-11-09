@@ -7,7 +7,7 @@ const image = document.querySelector('#image');
 function uploadImage() {
 
         const ref = firebase.storage().ref();
-    
+
         const file = document.querySelector('#photo').files[0];
         const addTime = new Date();
         const name = file.name + '' + addTime;
@@ -22,12 +22,21 @@ function uploadImage() {
         .then(snapshot => snapshot.ref.getDownloadURL())
         .then(url => {
             
+            const getColor = localStorage.getItem('userPickedColor');
+            const date = new Date();
+    
             const imgUrl = {
+               
+                color: getColor,
+                username: localStorage.getItem('username'),    
                 fullImgPath:url,
-                created_at: firebase.firestore.Timestamp.fromDate(addTime)
-            }
-
-            db.collection('imgURL').add(imgUrl);
+                created_at: firebase.firestore.Timestamp.fromDate(date)
+            };
+            
+            db.collection('post').add(imgUrl);
+        
+      
+           
 
           }).catch(console.error);
             
@@ -105,7 +114,41 @@ class Chat {
     getUsername(username){
         this.username = username;
         
-        localStorage.setItem('username', username);    
+    
+        // function uniqueId() {
+        //     const firstItem = {
+        //         value: "0"
+        //     };
+        
+        //     let counter = "123456789".split('')
+        //         .reduce((acc, curValue, curIndex, arr) => {
+        //             const curObj = {};
+        //             curObj.value = curValue;
+        //             curObj.prev = acc;
+
+        //             return curObj;
+        //         }, firstItem);
+        //     firstItem.prev = counter;
+
+        //     return function () {
+        //         let now = Date.now();
+        //         if (typeof performance === "object" && typeof performance.now === "function") {
+        //             now = performance.now().toString().replace('.', '');
+        //         }
+        //         counter = counter.prev;
+        //         return `${now}${Math.random().toString(16).substr(2)}${counter.value}`;
+        //     }
+        // }
+
+        // const randomIdGenerator = uniqueId();
+        // const userID = randomIdGenerator();
+
+
+        localStorage.setItem('username', username);  
+        // localStorage.setItem('uniqueID', userID);
+        
+
+
     }
    
 }
@@ -121,35 +164,6 @@ inputMessage.addEventListener('submit', e => {
 
     inputMessage.reset();
 });
-
-
-function uniqueId() {
-    const firstItem = {
-        value: "0"
-    };
-   
-    let counter = "123456789".split('')
-        .reduce((acc, curValue, curIndex, arr) => {
-            const curObj = {};
-            curObj.value = curValue;
-            curObj.prev = acc;
-
-            return curObj;
-        }, firstItem);
-    firstItem.prev = counter;
-
-    return function () {
-        let now = Date.now();
-        if (typeof performance === "object" && typeof performance.now === "function") {
-            now = performance.now().toString().replace('.', '');
-        }
-        counter = counter.prev;
-        return `${now}${Math.random().toString(16).substr(2)}${counter.value}`;
-    }
-}
-
-const randomIdGenerator = uniqueId();
-const userID = randomIdGenerator();
 
 
 
