@@ -4,37 +4,35 @@ const colorContainer = document.querySelector('.colorContainer');
 const image = document.querySelector('#image');
 
 
-// function uploadImage() {
+function uploadImage() {
 
-//     const ref = firebase.storage().ref();
+        const ref = firebase.storage().ref();
+    
+        const file = document.querySelector('#photo').files[0];
+        const addTime = new Date();
+        const name = file.name + '' + addTime;
+        const metadata = {
+            contentType:file.type
+        }
 
-//     const file = document.querySelector('#photo').files[0];
+        const task = ref.child(name).put(file, metadata);
+          
+    
+        task
+        .then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => {
+            
+            const imgUrl = {
+                fullImgPath:url,
+                created_at: firebase.firestore.Timestamp.fromDate(addTime)
+            }
 
-//     const name = file.name;
-//     const metadata = {
-//         contentType:file.type
-//     }
+            db.collection('imgURL').add(imgUrl);
 
-
-//     const task = ref.child(name).put(file, metadata);
-
-//     task
-//     .then(snapshot => {
-//         // snapshot.ref.getDownloadURL();
-//         image.src = snapshot.name;
-//         console.log(snapshot.metadata);
-//         console.log(snapshot.metadata.name);
-//     })
-//     // .then(url =>{
-//     //     console.log(url);
-//     // })
-
-// }
-
-
-
-
-
+          }).catch(console.error);
+            
+ };
+       
 
 
 
@@ -65,7 +63,6 @@ colorContainer.addEventListener('click', e => {
 
     
 });
-
 
 
 
@@ -107,7 +104,7 @@ class Chat {
 
     getUsername(username){
         this.username = username;
-    
+        
         localStorage.setItem('username', username);    
     }
    
@@ -119,15 +116,42 @@ inputMessage.addEventListener('submit', e => {
     e.preventDefault();
 
     chat.addChat(inputMessage['addUserMessage'].value)
-        .then(() => console.log('chat added!'))
+        .then(() => console.log())
         .catch(err => console.log(err));
-
-    const audio = new Audio('img/messSound.mp3');
-    audio.play();
-
 
     inputMessage.reset();
 });
+
+
+function uniqueId() {
+    const firstItem = {
+        value: "0"
+    };
+   
+    let counter = "123456789".split('')
+        .reduce((acc, curValue, curIndex, arr) => {
+            const curObj = {};
+            curObj.value = curValue;
+            curObj.prev = acc;
+
+            return curObj;
+        }, firstItem);
+    firstItem.prev = counter;
+
+    return function () {
+        let now = Date.now();
+        if (typeof performance === "object" && typeof performance.now === "function") {
+            now = performance.now().toString().replace('.', '');
+        }
+        counter = counter.prev;
+        return `${now}${Math.random().toString(16).substr(2)}${counter.value}`;
+    }
+}
+
+const randomIdGenerator = uniqueId();
+const userID = randomIdGenerator();
+
+
 
 
 

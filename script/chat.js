@@ -19,12 +19,16 @@ const username = localStorage.username ? localStorage.username : 'anon';
 const chatUI = new ChatUI(userMessage);
 const chat = new Chat(username);
 
+
 chat.getMessage((data) =>{
+
     
-    chatUI.render(data);
+  chatUI.render(data);
     
-  
 });
+
+
+
 
 
 
